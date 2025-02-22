@@ -1,2 +1,27 @@
-@import "tailwindcss"
-@plugin "daisyui"
+@import "tailwindcss";
+@plugin "daisyui";
+
+:root {
+  @apply p-15 m-auto bg-gradient-to-r from-blue-500 via-green-500 to-red-500;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.mainH1 {
+  @apply text-4xl font-bold text-center;
+}
+
+.previewImage {
+  @apply w-32 h-32 object-cover rounded-md;
+}
+
+.previewCard {
+  @apply max-w-xs p-5 card card-title shadow-xl  bg-gradient-to-t from-blue-500 via-green-500 to-red-500;
+}
+
+.header {
+  @apply text-2xl flex justify-around;
+}
+
+.main {
+  @apply flex flex-col items-center p-15;
+}
