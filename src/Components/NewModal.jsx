@@ -1,7 +1,5 @@
 const NewModal = () => {
-  return (
-    <div>NewModal</div>
-  )
-}
+  return <div>NewModal</div>;
+};
 
-export default NewModal
+export default NewModal;
