@@ -1,14 +1,16 @@
 import "./App.css";
 import Header from "./components/Header";
+import NewModal from "./Components/EntryModal";
 import Home from "./Home";
 
-function App() {
+const App = () => {
   return (
     <>
-      <Header />
-      <Home />
+    <Home/>
+    <Header/>
+    <NewModal/>
     </>
-  );
+  )
 }
 
 export default App;
