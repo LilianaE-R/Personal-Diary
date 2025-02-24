@@ -2,7 +2,7 @@
 @plugin "daisyui";
 
 :root {
-  @apply p-15 m-auto bg-gradient-to-r from-blue-500 via-green-500 to-red-500;
+  @apply p-15 m-auto bg-gradient-to-r from-[#173753]  to-[#ccf8d4];
   font-family: "Courier New", Courier, monospace;
 }
 
@@ -11,11 +11,19 @@
 }
 
 .previewImage {
-  @apply w-32 h-32 object-cover rounded-md;
+  @apply h-full w-fit object-cover rounded-md;
+}
+
+.addBtn {
+  @apply bg-gradient-to-tl from-[#173753] to-[#ccf8d4] w-full;
+}
+
+.addBar {
+  @apply flex items-center justify-end w-full h-full max-w-2/6 max-h-64;
 }
 
 .previewCard {
-  @apply max-w-xs p-5 card card-title shadow-xl  bg-gradient-to-t from-blue-500 via-green-500 to-red-500;
+  @apply flex m-6 w-full h-full max-w-2/6 max-h-64 p-3 card card-side shadow-xl  bg-gradient-to-tl from-[#173753] to-[#ccf8d4];
 }
 
 .header {
