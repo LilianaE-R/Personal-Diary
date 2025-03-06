@@ -1,14 +1,6 @@
 
-import { useState } from "react";
 
 const EditModal = () => {
-
-  const [localdata, setLocalData] = useState([])
-
-  // const pullLocalData = () => {
-  //   const storage = JSON.parse(localStorage.getItem("Diary"));
-  //   setLocalData(storage)
-  // }
 
   const deleteBtn = (data) => {
     const storage = JSON.parse(localStorage.getItem("Diary"));

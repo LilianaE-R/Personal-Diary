@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PreviewCard from "./Components/PreviewCard";
-import AddBar from "./Components/AddBar";
 import EntryModal from "./Components/EntryModal";
 
-
-
 const Home = () => {
+  const [localdata, setLocalData] = useState([]);
+
+  const pullLocalData = () => {
+    const storage = JSON.parse(localStorage.getItem("Diary"));
+    if (storage) {
+      setLocalData(storage);
+    }
+  };
+
+  useEffect(() => {
+    pullLocalData();
+  }, []);
+
   return (
     <div className="main">
       <h1 className="mainH1">Personal Diary</h1>
-      <EntryModal />
-      {/* <AddBar /> */}
-      <PreviewCard />
+      <EntryModal localData={localdata} />
+      <PreviewCard localData={localdata} />
     </div>
   );
 };

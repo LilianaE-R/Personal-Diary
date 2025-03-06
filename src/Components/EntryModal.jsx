@@ -1,15 +1,14 @@
 import { useState } from "react";
 
 const EntryModal = () => {
-
-  const [title, setTitle] = useState('')
-  const [notes, setNotes] = useState('')
-  const [date, setDate] = useState('')
-  const [image, setImage] = useState('')
+  const [title, setTitle] = useState("");
+  const [notes, setNotes] = useState("");
+  const [date, setDate] = useState("");
+  const [image, setImage] = useState("");
   //useState for title,notes,date in order to save it in the LS for a controlled form as now it is an uncontrolled one
 
-  const handleEvent = (event) => { 
-    event.preventDefault()
+  const handleEvent = (event) => {
+    event.preventDefault();
     // Get previous data OR an empty array
     const previousData = JSON.parse(localStorage.getItem("Diary")) || [];
     //set format for array with data for LS
@@ -21,18 +20,19 @@ const EntryModal = () => {
     };
     console.log(dataLocal);
     localStorage.setItem("Diary", JSON.stringify([...previousData, dataLocal]));
-  //use states here to return empty fields of input once the form is submitted/clicked save btn
-  setTitle('')
-  setNotes('')
-  setImage('')
-  setDate('')
-};
+    //use states here to return empty fields of input once the form is submitted/clicked save btn
+    setTitle("");
+    setNotes("");
+    setImage("");
+    setDate("");
+    window.location.reload();
+  };
 
   return (
     <div>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
       <button
-        className="btn"
+        className="btn btn-info addBtn"
         onClick={() => document.getElementById("my_modal_1").showModal()}
       >
         Today's entry
@@ -48,21 +48,27 @@ const EntryModal = () => {
             >
               <label>
                 Title:
-                <input 
-                name="title" 
-                required 
-                value={title} 
-                onChange={(event)=>{setTitle(event.target.value)}} />
+                <input
+                  name="title"
+                  required
+                  value={title}
+                  onChange={(event) => {
+                    setTitle(event.target.value);
+                  }}
+                />
               </label>
               <label>
                 Date:
-                <input 
-                type="date" 
-                name="date" 
-                required 
-                value={date} 
-                onChange={(event)=>{setDate(event.target.value)}} />
-              </label>        
+                <input
+                  type="date"
+                  name="date"
+                  required
+                  value={date}
+                  onChange={(event) => {
+                    setDate(event.target.value);
+                  }}
+                />
+              </label>
               <label>
                 <textarea
                   name="entry-notes"
@@ -70,7 +76,10 @@ const EntryModal = () => {
                   required
                   rows={4}
                   cols={40}
-                  value={notes} onChange={(event)=>{setNotes(event.target.value)}}
+                  value={notes}
+                  onChange={(event) => {
+                    setNotes(event.target.value);
+                  }}
                 />
               </label>
               {/* <label>
@@ -84,14 +93,17 @@ const EntryModal = () => {
                 onChange={(event)=>{setDate(event.target.value)}} />
               </label> */}
               {/* if there is a button in form, it will close the modal */}
-              <button 
-              type="button" 
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-              onClick={()=>document.getElementById('my_modal_1').close()}
+              <button
+                type="button"
+                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                onClick={() => document.getElementById("my_modal_1").close()}
               >
                 ✕
               </button>
-              <button type="submit" className="btn"> Save</button>
+              <button type="submit" className="btn">
+                {" "}
+                Save
+              </button>
             </form>
           </div>
         </div>
