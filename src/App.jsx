@@ -6,9 +6,9 @@ import EntryModal from "./Components/EntryModal";
 const App = () => {
   return (
     <>
-      <Home />
-      <Header />
-      <EntryModal />
+
+    <Header/>
+    <Home/>
     </>
   );
 };

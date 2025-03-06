@@ -33,7 +33,7 @@ const PreviewCard = () => {
   return (
     <>
       {lsData.map((entry, index) => (
-        <div className="previewCard" key={index}>
+        <div className="previewCard" id="previewCard" key={index}>
           <div className="w-2/6">
             <img src={entry.img} alt="preview" className="previewImage" />
           </div>
