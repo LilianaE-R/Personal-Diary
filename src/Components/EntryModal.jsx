@@ -1,4 +1,4 @@
-const NewModal = () => {
+const EntryModal = () => {
   const now = new Date();
   const dateTime = now.toLocaleString();
 
@@ -65,4 +65,4 @@ const NewModal = () => {
   );
 };
 
-export default NewModal;
+export default EntryModal;

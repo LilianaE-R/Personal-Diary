@@ -1,4 +1,4 @@
-const PastModal = () => {
+const EditModal = () => {
   return (
     <div>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
@@ -40,4 +40,4 @@ const PastModal = () => {
   );
 };
 
-export default PastModal;
+export default EditModal;
