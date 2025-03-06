@@ -1,21 +1,32 @@
-const NewModal = () => {
-  const now = new Date();
-  const dateTime = now.toLocaleString();
+import { useState } from "react";
 
-  //useState for title and notes in order to save it in the LS
+const EntryModal = () => {
 
-  const saveBtn = (event) => {
+  const [title, setTitle] = useState('')
+  const [notes, setNotes] = useState('')
+  const [date, setDate] = useState('')
+  const [image, setImage] = useState('')
+  //useState for title,notes,date in order to save it in the LS for a controlled form as now it is an uncontrolled one
+
+  const handleEvent = (event) => { 
+    event.preventDefault()
     // Get previous data OR an empty array
     const previousData = JSON.parse(localStorage.getItem("Diary")) || [];
     //set format for array with data for LS
     const dataLocal = {
-      title: event.target[0].value,
-      date: event.target[1].value,
-      note: event.target[2].value,
+      title: title,
+      date: date,
+      image: image,
+      note: notes,
     };
     console.log(dataLocal);
     localStorage.setItem("Diary", JSON.stringify([...previousData, dataLocal]));
-  };
+  //use states here to return empty fields of input once the form is submitted/clicked save btn
+  setTitle('')
+  setNotes('')
+  setImage('')
+  setDate('')
+};
 
   return (
     <div>
@@ -30,18 +41,28 @@ const NewModal = () => {
         <div className="modal-box">
           <div className="modal-action justify-center">
             <form
+              id="entry-modal"
               method="dialog"
               className="justify-around gap-8"
-              onSubmit={saveBtn}
+              onSubmit={handleEvent}
             >
               <label>
                 Title:
-                <input name="title" required />
+                <input 
+                name="title" 
+                required 
+                value={title} 
+                onChange={(event)=>{setTitle(event.target.value)}} />
               </label>
               <label>
                 Date:
-                <input type="date" name="date" required />
-              </label>
+                <input 
+                type="date" 
+                name="date" 
+                required 
+                value={date} 
+                onChange={(event)=>{setDate(event.target.value)}} />
+              </label>        
               <label>
                 <textarea
                   name="entry-notes"
@@ -49,14 +70,28 @@ const NewModal = () => {
                   required
                   rows={4}
                   cols={40}
+                  value={notes} onChange={(event)=>{setNotes(event.target.value)}}
                 />
               </label>
+              {/* <label>
+                Image:
+                <input 
+                type="image" 
+                name="image" 
+                required
+                className="size-24 object-contain w-64" 
+                src={image} 
+                onChange={(event)=>{setDate(event.target.value)}} />
+              </label> */}
               {/* if there is a button in form, it will close the modal */}
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              <button 
+              type="button" 
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              onClick={()=>document.getElementById('my_modal_1').close()}
+              >
                 ✕
               </button>
-              <button className="btn">Delete</button>
-              <button className="btn">Save</button>
+              <button type="submit" className="btn"> Save</button>
             </form>
           </div>
         </div>
@@ -65,4 +100,4 @@ const NewModal = () => {
   );
 };
 
-export default NewModal;
+export default EntryModal;
