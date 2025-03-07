@@ -1,16 +1,12 @@
 import { useState } from "react";
 
-const EditModal = () => {
+const EditModal = ({data}) => {
 
-  const [localdata, setLocalData] = useState([])
+  
 
-  // const pullLocalData = () => {
-  //   const storage = JSON.parse(localStorage.getItem("Diary"));
-  //   setLocalData(storage)
-  // }
+  
 
   const deleteBtn = (data) => {
-    const storage = JSON.parse(localStorage.getItem("Diary"));
     for (let i = 0; i < storage.length; i++) {
       if (storage[i].date === data.date) {
           storage.splice(i, 1);
@@ -36,13 +32,6 @@ const EditModal = () => {
 
   return (
     <div>
-      {/* Open the modal using document.getElementById('ID').showModal() method */}
-      <button
-        className="btn"
-        onClick={() => document.getElementById("my_modal_2").showModal()}
-      >
-        Today's entry
-      </button>
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
           <label>

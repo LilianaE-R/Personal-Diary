@@ -1,50 +1,27 @@
-const PreviewCard = () => {
-  // Here is the preview of the journal entry. It reads the data out of the local storage, if there is any.
-
-  // const [showPreview, setShowPreview] = useState(lsData);
-
-  // useEffect(() => {
-  //   if (localStorage.getItem("journalEntries")) {
-  //     setShowPreview(true);
-  //   }
-  // }, []);
-
-  const lsData = [
-    {
-      title: "Title of the first Entry",
-      date: "First Date",
-      text: "Text of Entry",
-      img: "https://i.pinimg.com/736x/2a/11/93/2a1193dabddd7412fb06ddaf78b7f872.jpg",
-    },
-    {
-      title: "Title of the second Entry",
-      date: "Second Date",
-      text: "Text of Entry",
-      img: "https://i.pinimg.com/736x/2a/11/93/2a1193dabddd7412fb06ddaf78b7f872.jpg",
-    },
-    {
-      title: "Title of the third Entry",
-      date: "Third Date",
-      text: "Text of Entry",
-      img: "https://i.pinimg.com/736x/2a/11/93/2a1193dabddd7412fb06ddaf78b7f872.jpg",
-    },
-  ];
+const PreviewCard = ({ data }) => {
 
   return (
     <>
-      {lsData.map((entry, index) => (
+      {data && data.map((entry, index) => (
         <div className="previewCard" id="previewCard" key={index}>
           <div className="w-2/6">
             <img src={entry.img} alt="preview" className="previewImage" />
           </div>
           <div className="card-body w-4/6">
-            <h2 className="card-title">{entry.date}</h2>
-            <p>{entry.title}</p>
-            <div className="card-actions justify-start">
-              <button className="btn btn-outline">View full entry</button>
+            <h3 className="card-title">{entry.date}</h3>
+            <h2>{entry.title}</h2>
+            <p>{entry.note}</p>
+              {/* <button className="btn btn-outline" onClick={()=>{}}>View full entry</button> add an id here to make sure only that specific entry is created */}
+              {/* Open the modal using document.getElementById('ID').showModal() method */}
+              <button
+                className="btn"
+                onClick={() => document.getElementById("my_modal_2").showModal()}
+              >
+                View full details
+              </button>
             </div>
           </div>
-        </div>
+        
       ))}
     </>
   );

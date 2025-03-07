@@ -12,8 +12,10 @@ const EntryModal = () => {
     event.preventDefault()
     // Get previous data OR an empty array
     const previousData = JSON.parse(localStorage.getItem("Diary")) || [];
+    const newId = previousData.length + 1
     //set format for array with data for LS
     const dataLocal = {
+      id: newId,
       title: title,
       date: date,
       image: image,
@@ -38,33 +40,47 @@ const EntryModal = () => {
         Today's entry
       </button>
       <dialog id="my_modal_1" className="modal">
-        <div className="modal-box">
+        <div className="modal-box max-w-3xl">
           <div className="modal-action justify-center">
             <form
               id="entry-modal"
               method="dialog"
-              className="justify-around gap-8"
+              className="flex flex-col w-full"
               onSubmit={handleEvent}
             >
-              <label>
+              <label className="text-lg font-bold">
                 Title:
                 <input 
+                className="input input-success w-5/6"
                 name="title" 
                 required 
                 value={title} 
                 onChange={(event)=>{setTitle(event.target.value)}} />
               </label>
-              <label>
+              <label className="mt-6 text-lg font-bold">
                 Date:
                 <input 
+                className="input input-success"
                 type="date" 
                 name="date" 
                 required 
                 value={date} 
                 onChange={(event)=>{setDate(event.target.value)}} />
-              </label>        
-              <label>
+              </label>  
+              <label className="mt-6 text-lg font-bold">
+                Image:
+                <input 
+                className="input input-success w-5/6"
+                name="image" 
+                required 
+                rows={1}
+                cols={1}
+                value={image} 
+                onChange={(event)=>{setImage(event.target.value)}} />
+              </label>           
+              <label for="entry-notes" className="mt-6 text-lg font-bold">
                 <textarea
+                  className="textarea textarea-success w-full"
                   name="entry-notes"
                   placeholder="Write your notes here"
                   required
@@ -73,16 +89,7 @@ const EntryModal = () => {
                   value={notes} onChange={(event)=>{setNotes(event.target.value)}}
                 />
               </label>
-              {/* <label>
-                Image:
-                <input 
-                type="image" 
-                name="image" 
-                required
-                className="size-24 object-contain w-64" 
-                src={image} 
-                onChange={(event)=>{setDate(event.target.value)}} />
-              </label> */}
+                 
               {/* if there is a button in form, it will close the modal */}
               <button 
               type="button" 
@@ -91,7 +98,7 @@ const EntryModal = () => {
               >
                 ✕
               </button>
-              <button type="submit" className="btn"> Save</button>
+              <button type="submit" className="btn mt-6 btn-outline btn-success"> Save</button>
             </form>
           </div>
         </div>
