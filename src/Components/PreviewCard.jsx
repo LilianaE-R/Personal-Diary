@@ -1,51 +1,48 @@
-const PreviewCard = () => {
-  // Here is the preview of the journal entry. It reads the data out of the local storage, if there is any.
+import React, { useState, useEffect } from "react";
 
-  // const [showPreview, setShowPreview] = useState(lsData);
+const PreviewCard = ({ localData, currentIndex, onViewEntryClick }) => {
+  //Setting the state for the preview: Show or show not?
+  const [showPreview, setShowPreview] = useState(false);
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("journalEntries")) {
-  //     setShowPreview(true);
-  //   }
-  // }, []);
+  //Using the useEffect to check if there is any data in the local storage: if yes, show the preview
+  useEffect(() => {
+    if (localData && localData.length > 0) {
+      setShowPreview(true);
+    }
+  }, [localData]);
 
-  const lsData = [
-    {
-      title: "Title of the first Entry",
-      date: "First Date",
-      text: "Text of Entry",
-      img: "https://i.pinimg.com/736x/2a/11/93/2a1193dabddd7412fb06ddaf78b7f872.jpg",
-    },
-    {
-      title: "Title of the second Entry",
-      date: "Second Date",
-      text: "Text of Entry",
-      img: "https://i.pinimg.com/736x/2a/11/93/2a1193dabddd7412fb06ddaf78b7f872.jpg",
-    },
-    {
-      title: "Title of the third Entry",
-      date: "Third Date",
-      text: "Text of Entry",
-      img: "https://i.pinimg.com/736x/2a/11/93/2a1193dabddd7412fb06ddaf78b7f872.jpg",
-    },
-  ];
+  //Text if there is no entry yet
+  if (!localData || localData.length === 0) {
+    return <p>No entries available</p>;
+  }
+
+  const currentEntry = localData[currentIndex];
 
   return (
     <>
-      {lsData.map((entry, index) => (
-        <div className="previewCard" id="previewCard" key={index}>
+      {showPreview && currentEntry && (
+        <div className="previewCard" id="previewCard">
           <div className="w-2/6">
-            <img src={entry.img} alt="preview" className="previewImage" />
+            <img
+              src={currentEntry.image}
+              alt="preview"
+              className="previewImage"
+            />
           </div>
           <div className="card-body w-4/6">
-            <h2 className="card-title">{entry.date}</h2>
-            <p>{entry.title}</p>
+            <h2 className="card-title">{currentEntry.date}</h2>
+            <p>{currentEntry.title}</p>
             <div className="card-actions justify-start">
-              <button className="btn btn-outline">View full entry</button>
+              <button
+                className="btn btn-outline"
+                onClick={() => onViewEntryClick(currentEntry)}
+              >
+                View full entry
+              </button>
             </div>
           </div>
         </div>
-      ))}
+      )}
     </>
   );
 };
