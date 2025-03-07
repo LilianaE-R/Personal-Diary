@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const EditModal = ({ localData, onClose }) => {
+const EditModal = ({ localData, entry, onClose }) => {
+  //Setting the state for the title, notes, date and image
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
 
+  //Using the useEffect to set the state of the title, notes, date and image, if anything changes of the current entry
+  useEffect(() => {
+    if (entry) {
+      setTitle(entry.title);
+      setNotes(entry.note);
+      setDate(entry.date);
+      setImage(entry.image);
+    }
+  }, [entry]);
+
+  //handling the event of the form submission
   const handleEvent = (event) => {
     event.preventDefault();
     const previousData = localData ? localData : [];
