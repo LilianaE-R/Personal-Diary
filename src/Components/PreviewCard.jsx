@@ -1,28 +1,48 @@
-const PreviewCard = ({ data }) => {
+import React, { useState, useEffect } from "react";
+
+const PreviewCard = ({ localData, currentIndex, onViewEntryClick }) => {
+  //Setting the state for the preview: Show or show not?
+  const [showPreview, setShowPreview] = useState(false);
+
+  //Using the useEffect to check if there is any data in the local storage: if yes, show the preview
+  useEffect(() => {
+    if (localData && localData.length > 0) {
+      setShowPreview(true);
+    }
+  }, [localData]);
+
+  //Text if there is no entry yet
+  if (!localData || localData.length === 0) {
+    return <p>No entries available</p>;
+  }
+
+  const currentEntry = localData[currentIndex];
 
   return (
     <>
-      {data && data.map((entry, index) => (
-        <div className="previewCard" id="previewCard" key={index}>
+      {showPreview && currentEntry && (
+        <div className="previewCard" id="previewCard">
           <div className="w-2/6">
-            <img src={entry.img} alt="preview" className="previewImage" />
+            <img
+              src={currentEntry.image}
+              alt="preview"
+              className="previewImage"
+            />
           </div>
           <div className="card-body w-4/6">
-            <h3 className="card-title">{entry.date}</h3>
-            <h2>{entry.title}</h2>
-            <p>{entry.note}</p>
-              {/* <button className="btn btn-outline" onClick={()=>{}}>View full entry</button> add an id here to make sure only that specific entry is created */}
-              {/* Open the modal using document.getElementById('ID').showModal() method */}
+            <h2 className="card-title">{currentEntry.date}</h2>
+            <p>{currentEntry.title}</p>
+            <div className="card-actions justify-start">
               <button
-                className="btn"
-                onClick={() => document.getElementById("my_modal_2").showModal()}
+                className="btn btn-outline"
+                onClick={() => onViewEntryClick(currentEntry)}
               >
-                View full details
+                View full entry
               </button>
             </div>
           </div>
-        
-      ))}
+        </div>
+      )}
     </>
   );
 };
