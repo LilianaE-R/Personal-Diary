@@ -15,11 +15,7 @@
 }
 
 .addBtn {
-  @apply bg-gradient-to-tl from-[#173753] to-[#ccf8d4] w-full;
-}
-
-.addBar {
-  @apply flex items-center justify-end w-full h-full max-w-2/6 max-h-64;
+  @apply max-w-2/6 bg-gradient-to-tl from-[#173753] to-[#ccf8d4] w-full;
 }
 
 .previewCard {

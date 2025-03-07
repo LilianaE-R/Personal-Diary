@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
 import EntryModal from "./EntryModal";
 
-const PreviewCard = ({ localData }) => {
-  // Here is the preview of the journal entry. It reads the data out of the local storage, if there is any.
-
+const PreviewCard = ({ localData, onViewEntryClick }) => {
   const [showPreview, setShowPreview] = useState(false);
 
   useEffect(() => {
-    if (localData) {
+    if (localData && localData.length > 0) {
       setShowPreview(true);
     }
-    return () => {
-      setShowPreview(false);
-    };
   }, [localData]);
 
   if (!localData || localData.length === 0) {
@@ -31,7 +26,10 @@ const PreviewCard = ({ localData }) => {
               <h2 className="card-title">{entry.date}</h2>
               <p>{entry.title}</p>
               <div className="card-actions justify-start">
-                <button className="btn btn-outline" onClick={EntryModal}>
+                <button
+                  className="btn btn-outline"
+                  onClick={() => onViewEntryClick(entry)}
+                >
                   View full entry
                 </button>
               </div>
