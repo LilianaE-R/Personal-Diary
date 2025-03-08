@@ -79,6 +79,7 @@ const Home = () => {
 
   const handleSaveEntry = (index) => {
     setCurrentIndex(index);
+    pullLocalData();
   };
 
   //Handling the navigation BUTTONS
