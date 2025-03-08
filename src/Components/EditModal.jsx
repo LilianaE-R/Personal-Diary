@@ -22,6 +22,7 @@ const EditModal = ({ localData, entry, onClose }) => {
   //handling the event of the form submission
   const handleEvent = (event) => {
     event.preventDefault();
+    if (!entry){
     const previousData = localData ? localData : [];
     const newId = previousData.length + 1
     const dataLocal = {
@@ -34,22 +35,21 @@ const EditModal = ({ localData, entry, onClose }) => {
     localStorage.setItem("Diary", JSON.stringify([...previousData, dataLocal]));
     setTitle("");
     setNotes("");
-    setImage(null);
+    setImage("");
     setDate("");
     onClose();
+  } else {
+    entry.title = title
+    entry.date = date
+    entry.note = notes
+    entry.image = image
 
-    
-
-  //   const editLsData = () => {
-  //     if (localData.id = entry.id){
-  //       localStorage.setItem("Diary", JSON.stringify(localData))
-  //     }
-  //   }
-
+    localStorage.setItem("Diary", JSON.stringify(localData));
+  }
   };
 
   return (
-    <div className="modal-box max-w-3xl">
+    <div className="modal-box max-w-3xl text-black">
       <div className="modal-action justify-center">
         <form
           id="entry-modal"
@@ -87,7 +87,7 @@ const EditModal = ({ localData, entry, onClose }) => {
               value={image}
               onChange={(event) => { setImage(event.target.value) }} />
           </label>
-          <label for="entry-notes" className="mt-6 text-lg font-bold">
+          <label htmlFor="entry-notes" className="mt-6 text-lg font-bold">
             <textarea
               className="textarea textarea-success w-full"
               name="entry-notes"

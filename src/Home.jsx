@@ -5,10 +5,10 @@ import EditModal from "./Components/EditModal";
 import Header from "./Components/Header";
 
 const Home = () => {
-  const [localdata, setLocalData] = useState([]);
+  const [localData, setLocalData] = useState([]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isEntryModalOpen, setIsEntryModalOpen] = useState(false);
-  const [selectedEntry, setSelectedEntry] = useState(null);
+  const [selectedEntry, setSelectedEntry] = useState({});
   const [entryToEdit, setEntryToEdit] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const editModalRef = useRef(null);
@@ -44,8 +44,10 @@ const Home = () => {
   //Handling the add entry click
   const handleAddEntryClick = () => {
     setEntryToEdit(null); // Clear any existing entry data
+    setSelectedEntry(null)
     setIsEditModalOpen(true);
   };
+
 
   //Handling the edit modal
   const handleCloseEditModal = () => {
@@ -84,12 +86,12 @@ const Home = () => {
 
   const handleNextClick = () => {
     setCurrentIndex((prevIndex) =>
-      Math.min(prevIndex + 1, localdata.length - 1)
+      Math.min(prevIndex + 1, localData.length - 1)
     );
   };
 
   const handleCurrentClick = () => {
-    setCurrentIndex(Math.floor(localdata.length - 1));
+    setCurrentIndex(Math.floor(localData.length - 1));
   };
   //End of the handling the navigation
 
@@ -106,14 +108,14 @@ const Home = () => {
       </button>
 
       <PreviewCard
-        localData={localdata}
+        localData={localData}
         currentIndex={currentIndex}
         onViewEntryClick={handleViewEntryClick}
       />
 
       <dialog ref={editModalRef} className="modal">
         <EditModal
-          localData={localdata}
+          localData={localData}
           entry={entryToEdit}
           onClose={handleCloseEditModal}
         />
@@ -121,6 +123,7 @@ const Home = () => {
 
       <dialog ref={entryModalRef} className="modal">
         <EntryModal
+          localData={localData}
           entry={selectedEntry}
           onClose={handleCloseEntryModal}
           onEdit={handleEditEntryClick}
