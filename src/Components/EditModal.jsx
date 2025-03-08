@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const EditModal = ({ localData, entry, onClose }) => {
+const EditModal = ({ localData, entry, onClose, onSave }) => {
   //Setting the state for the title, notes, date and image
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
@@ -15,7 +15,7 @@ const EditModal = ({ localData, entry, onClose }) => {
       setDate(entry.date);
       setImage(entry.image);
     } else {
-      entry = null
+      entry = null;
     }
   }, [entry]);
 
@@ -23,7 +23,7 @@ const EditModal = ({ localData, entry, onClose }) => {
   const handleEvent = (event) => {
     event.preventDefault();
     const previousData = localData ? localData : [];
-    const newId = previousData.length + 1
+    const newId = previousData.length + 1;
     const dataLocal = {
       id: newId,
       title: title,
@@ -31,21 +31,27 @@ const EditModal = ({ localData, entry, onClose }) => {
       image: image,
       note: notes,
     };
-    localStorage.setItem("Diary", JSON.stringify([...previousData, dataLocal]));
+
+    let updatedData;
+    if (entry) {
+      // Update existing entry
+      updatedData = previousData.map((item) =>
+        item.id === entry.id ? dataLocal : item
+      );
+    } else {
+      // Add new entry
+      updatedData = [...previousData, dataLocal];
+    }
+
+    localStorage.setItem("Diary", JSON.stringify(updatedData));
+    const newIndex = updatedData.findIndex((item) => item.id === newId);
+
     setTitle("");
     setNotes("");
-    setImage(null);
+    setImage("");
     setDate("");
     onClose();
-
-    
-
-  //   const editLsData = () => {
-  //     if (localData.id = entry.id){
-  //       localStorage.setItem("Diary", JSON.stringify(localData))
-  //     }
-  //   }
-
+    onSave(newIndex);
   };
 
   return (
@@ -85,7 +91,10 @@ const EditModal = ({ localData, entry, onClose }) => {
               name="image"
               required
               value={image}
-              onChange={(event) => { setImage(event.target.value) }} />
+              onChange={(event) => {
+                setImage(event.target.value);
+              }}
+            />
           </label>
           <label for="entry-notes" className="mt-6 text-lg font-bold">
             <textarea
@@ -106,9 +115,7 @@ const EditModal = ({ localData, entry, onClose }) => {
           >
             ✕
           </button>
-          <button 
-          type="submit" 
-          className="btn mt-6 btn-outline btn-success">
+          <button type="submit" className="btn mt-6 btn-outline btn-success">
             Save
           </button>
         </form>
@@ -118,8 +125,6 @@ const EditModal = ({ localData, entry, onClose }) => {
 };
 
 export default EditModal;
-
-
 
 // [
 //   { "title": "Day 1", "date": "2025-01-01", "image": "https://picsum.photos/200/300", "note": "Today was a productive day." },

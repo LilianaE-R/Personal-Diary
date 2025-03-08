@@ -77,6 +77,10 @@ const Home = () => {
     setIsEntryModalOpen(false);
   };
 
+  const handleSaveEntry = (index) => {
+    setCurrentIndex(index);
+  };
+
   //Handling the navigation BUTTONS
   const handlePreviousClick = () => {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
@@ -89,7 +93,7 @@ const Home = () => {
   };
 
   const handleCurrentClick = () => {
-    setCurrentIndex(Math.floor(localdata.length - 1));
+    setCurrentIndex(localdata.length - 1);
   };
   //End of the handling the navigation
 
@@ -116,6 +120,7 @@ const Home = () => {
           localData={localdata}
           entry={entryToEdit}
           onClose={handleCloseEditModal}
+          onSave={handleSaveEntry}
         />
       </dialog>
 
