@@ -22,19 +22,19 @@ const Home = () => {
     }
   };
 
-  //Using the useEffect to pull the data from the local storage
+  //useEffect to pull data from local storage (once)
   useEffect(() => {
     pullLocalData();
   }, []);
 
-  //Using the useEffect to open the EDIT modal and check if the modal is open
+  //useEffect to show edit modal when isEditModalOpen changes
   useEffect(() => {
     if (isEditModalOpen && editModalRef.current) {
       editModalRef.current.showModal();
     }
   }, [isEditModalOpen]);
 
-  //Using the useEffect to open the ENTRY modal and check if the modal is open
+  //useEffect to show entry modal when isEntryModalOpen changes
   useEffect(() => {
     if (isEntryModalOpen && entryModalRef.current) {
       entryModalRef.current.showModal();
@@ -43,7 +43,9 @@ const Home = () => {
 
   //Handling the add entry click
   const handleAddEntryClick = () => {
-    setEntryToEdit(null); // Clear any existing entry data
+    // Reset the entry to edit
+    setEntryToEdit(null); 
+    // set the state to "true" (is open)
     setIsEditModalOpen(true);
   };
 
