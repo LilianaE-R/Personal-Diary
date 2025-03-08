@@ -14,6 +14,8 @@ const EditModal = ({ localData, entry, onClose }) => {
       setNotes(entry.note);
       setDate(entry.date);
       setImage(entry.image);
+    } else {
+      entry = null
     }
   }, [entry]);
 
@@ -21,7 +23,9 @@ const EditModal = ({ localData, entry, onClose }) => {
   const handleEvent = (event) => {
     event.preventDefault();
     const previousData = localData ? localData : [];
+    const newId = previousData.length + 1
     const dataLocal = {
+      id: newId,
       title: title,
       date: date,
       image: image,
@@ -33,29 +37,37 @@ const EditModal = ({ localData, entry, onClose }) => {
     setImage("");
     setDate("");
     onClose();
+
+  //   const editLsData = () => {
+  //     if (localData.id = entry.id){
+  //       localStorage.setItem("Diary", JSON.stringify(localData))
+  //     }
+  //   }
   };
 
   return (
-    <div className="modal-box">
+    <div className="modal-box max-w-3xl">
       <div className="modal-action justify-center">
         <form
           id="entry-modal"
           method="dialog"
-          className="justify-around gap-8"
+          className="flex flex-col w-full"
           onSubmit={handleEvent}
         >
-          <label>
+          <label className="text-lg font-bold">
             Title:
             <input
+              className="input input-success w-5/6"
               name="title"
               required
               value={title}
               onChange={(event) => setTitle(event.target.value)}
             />
           </label>
-          <label>
+          <label className="mt-6 text-lg font-bold">
             Date:
             <input
+              className="input input-success"
               type="date"
               name="date"
               required
@@ -63,8 +75,18 @@ const EditModal = ({ localData, entry, onClose }) => {
               onChange={(event) => setDate(event.target.value)}
             />
           </label>
-          <label>
+          <label className="mt-6 text-lg font-bold">
+            Image:
+            <input
+              className="input input-success w-5/6"
+              name="image"
+              required
+              value={image}
+              onChange={(event) => { setImage(event.target.value) }} />
+          </label>
+          <label for="entry-notes" className="mt-6 text-lg font-bold">
             <textarea
+              className="textarea textarea-success w-full"
               name="entry-notes"
               placeholder="Write your notes here"
               required
@@ -81,7 +103,9 @@ const EditModal = ({ localData, entry, onClose }) => {
           >
             ✕
           </button>
-          <button type="submit" className="btn">
+          <button 
+          type="submit" 
+          className="btn mt-6 btn-outline btn-success">
             Save
           </button>
         </form>

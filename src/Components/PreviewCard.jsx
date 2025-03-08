@@ -31,10 +31,10 @@ const PreviewCard = ({ localData, currentIndex, onViewEntryClick }) => {
           </div>
           <div className="card-body w-4/6">
             <h2 className="card-title">{currentEntry.date}</h2>
-            <p>{currentEntry.title}</p>
+            <p className="text-xl">{currentEntry.title}</p>
             <div className="card-actions justify-start">
               <button
-                className="btn btn-outline"
+                className="btn btn-outline w-auto"
                 onClick={() => onViewEntryClick(currentEntry)}
               >
                 View full entry

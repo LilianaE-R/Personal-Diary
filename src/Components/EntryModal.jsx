@@ -5,13 +5,31 @@ const EntryModal = ({ entry, onClose, onEdit }) => {
   if (!entry) return null;
 
   return (
-    <div className="modal-box">
-      <h2>{entry.title}</h2>
-      <p>{entry.date}</p>
-      <p>{entry.note}</p>
-      <button className="btn btn-info" onClick={() => onEdit(entry)}>
-        Edit
-      </button>
+    <div className="card bg-base-100 w-96 shadow-sm">
+      <figure>
+        <img
+          src={entry.image}
+          alt={entry.id} />
+      </figure>
+      <div className="card-body">
+        <h2 className="card-title">{entry.title}</h2>
+        <h3 className="card-subtitle">{entry.date}</h3>
+        <p>{entry.note}</p>
+        <div className="card-actions justify-end">
+          <button 
+          className="btn btn-info" 
+          onClick={() => onEdit(entry)}>
+            Edit
+          </button>
+          <button
+            type="button"
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            onClick={onClose}
+          >
+            ✕
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
