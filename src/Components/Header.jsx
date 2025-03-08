@@ -12,7 +12,7 @@ const Header = ({ onPreviousClick, onNextClick, onCurrentClick }) => {
         </li>
         <li>
           <button className="btn btn-outline m-4" onClick={onCurrentClick}>
-            Current
+            Today's Entry
           </button>
         </li>
         <li>

@@ -2,7 +2,7 @@
 @plugin "daisyui";
 
 :root {
-  @apply p-7 m-auto bg-gradient-to-r from-[#173753]  to-[#ccf8d4];
+  @apply p-7 m-auto bg-gradient-to-r from-[#173753]  to-[#ccf8d4] text-white;
   font-family: "Courier New", Courier, monospace;
 }
 
