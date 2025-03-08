@@ -46,6 +46,7 @@ const EditModal = ({ localData, entry, onClose, onSave }) => {
     localStorage.setItem("Diary", JSON.stringify(updatedData));
     const newIndex = updatedData.findIndex((item) => item.id === newId);
 
+    // Resetting states, closing the modal and saving the new data -> new index helps to show preview of the new entry
     setTitle("");
     setNotes("");
     setImage("");
