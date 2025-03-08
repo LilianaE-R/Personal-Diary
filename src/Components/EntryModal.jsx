@@ -1,11 +1,20 @@
 import React from "react";
 
-const EntryModal = ({ entry, onClose, onEdit }) => {
+const EntryModal = ({ entry, onClose, onEdit, localData }) => {
   // check if there is no entry
   if (!entry) return null;
 
+  const handleDelete = () => {
+    const result = localData.filter((item) => {
+      return item.id != entry.id
+    })
+    console.log(result)
+    localStorage.setItem("Diary", JSON.stringify(result));
+    location.reload()
+  }
+
   return (
-    <div className="card bg-base-100 w-96 shadow-sm">
+    <div className="card bg-base-100 w-96 shadow-sm text-black">
       <figure>
         <img
           src={entry.image}
@@ -20,6 +29,11 @@ const EntryModal = ({ entry, onClose, onEdit }) => {
           className="btn btn-info" 
           onClick={() => onEdit(entry)}>
             Edit
+          </button>
+          <button 
+          className="btn btn-info" 
+          onClick={handleDelete}>
+            Delete
           </button>
           <button
             type="button"

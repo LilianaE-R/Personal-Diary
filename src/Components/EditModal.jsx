@@ -22,41 +22,49 @@ const EditModal = ({ localData, entry, onClose, onSave }) => {
   //handling the event of the form submission
   const handleEvent = (event) => {
     event.preventDefault();
-    const previousData = localData ? localData : [];
-    const newId = previousData.length + 1;
-    const dataLocal = {
-      id: newId,
-      title: title,
-      date: date,
-      image: image,
-      note: notes,
-    };
+    if (!entry) {
+      const previousData = localData ? localData : [];
+      const newId = previousData.length + 1;
+      const dataLocal = {
+        id: newId,
+        title: title,
+        date: date,
+        image: image,
+        note: notes,
+      };
 
-    let updatedData;
-    if (entry) {
-      // Update existing entry
-      updatedData = previousData.map((item) =>
-        item.id === entry.id ? dataLocal : item
-      );
+      let updatedData;
+      if (entry) {
+        // Update existing entry
+        updatedData = previousData.map((item) =>
+          item.id === entry.id ? dataLocal : item
+        );
+      } else {
+        // Add new entry
+        updatedData = [...previousData, dataLocal];
+      }
+
+      localStorage.setItem("Diary", JSON.stringify(updatedData));
+      const newIndex = updatedData.findIndex((item) => item.id === newId);
+
+      // Resetting states, closing the modal and saving the new data -> new index helps to show preview of the new entry
+      setTitle("");
+      setNotes("");
+      setImage("");
+      setDate("");
+      onClose();
     } else {
-      // Add new entry
-      updatedData = [...previousData, dataLocal];
+      entry.title = title;
+      entry.date = date;
+      entry.note = notes;
+      entry.image = image;
+
+      localStorage.setItem("Diary", JSON.stringify(localData));
     }
-
-    localStorage.setItem("Diary", JSON.stringify(updatedData));
-    const newIndex = updatedData.findIndex((item) => item.id === newId);
-
-    // Resetting states, closing the modal and saving the new data -> new index helps to show preview of the new entry
-    setTitle("");
-    setNotes("");
-    setImage("");
-    setDate("");
-    onClose();
-    onSave(newIndex);
   };
 
   return (
-    <div className="modal-box max-w-3xl">
+    <div className="modal-box max-w-3xl text-black">
       <div className="modal-action justify-center">
         <form
           id="entry-modal"
@@ -97,7 +105,7 @@ const EditModal = ({ localData, entry, onClose, onSave }) => {
               }}
             />
           </label>
-          <label for="entry-notes" className="mt-6 text-lg font-bold">
+          <label htmlFor="entry-notes" className="mt-6 text-lg font-bold">
             <textarea
               className="textarea textarea-success w-full"
               name="entry-notes"
