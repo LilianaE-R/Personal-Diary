@@ -89,7 +89,7 @@ const Home = () => {
   };
 
   const handleCurrentClick = () => {
-    setCurrentIndex(Math.floor(localdata.length / 2));
+    setCurrentIndex(Math.floor(localdata.length - 1));
   };
   //End of the handling the navigation
 
