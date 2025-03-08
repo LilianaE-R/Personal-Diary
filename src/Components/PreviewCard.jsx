@@ -16,33 +16,32 @@ const PreviewCard = ({ localData, currentIndex, onViewEntryClick }) => {
     return <p>No entries available</p>;
   }
 
-  const currentEntry = localData[currentIndex];
+  const entries = localData.slice(currentIndex, currentIndex + 3);
 
   return (
     <>
-      {showPreview && currentEntry && (
-        <div className="previewCard" id="previewCard">
-          <div className="w-2/6">
-            <img
-              src={currentEntry.image}
-              alt="preview"
-              className="previewImage"
-            />
-          </div>
-          <div className="card-body w-4/6">
-            <h2 className="card-title">{currentEntry.date}</h2>
-            <p className="text-xl">{currentEntry.title}</p>
-            <div className="card-actions justify-start">
-              <button
-                className="btn btn-outline w-auto"
-                onClick={() => onViewEntryClick(currentEntry)}
-              >
-                View full entry
-              </button>
+      <div className="previewCardContainer">
+        {showPreview &&
+          entries.map((entry, index) => (
+            <div className="previewCard" id="previewCard">
+              <div className="w-2/6">
+                <img src={entry.image} alt="preview" className="previewImage" />
+              </div>
+              <div className="card-body w-4/6">
+                <h2 className="card-title">{entry.date}</h2>
+                <p className="text-xl">{entry.title}</p>
+                <div className="card-actions justify-start">
+                  <button
+                    className="btn btn-outline w-auto"
+                    onClick={() => onViewEntryClick(entry)}
+                  >
+                    View full entry
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          ))}
+      </div>
     </>
   );
 };

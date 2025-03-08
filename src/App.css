@@ -18,8 +18,12 @@
   @apply max-w-2/6 bg-gradient-to-tl from-[#173753] to-[#ccf8d4] w-full;
 }
 
+.previewCardContainer {
+  @apply flex justify-between;
+}
+
 .previewCard {
-  @apply flex m-6 w-full h-full max-w-2/6 max-h-64 p-3 card card-side shadow-xl  bg-gradient-to-tl from-[#173753] to-[#ccf8d4];
+  @apply flex m-6 w-full h-full max-h-64 p-3 card card-side shadow-xl  bg-gradient-to-tl from-[#173753] to-[#ccf8d4];
 }
 
 .header {
